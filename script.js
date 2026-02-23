@@ -6,62 +6,51 @@ window.onload = () => {
 
     const buzzwords = [
         "量子神經網絡計算...", "深度強化鏈路掃描...", 
-        "多維度向量對齊...", "矩陣崩解運算中...", 
-        "超參數動態優化...", "AGI 核心意識覺醒..."
+        "多維度向量對齊...", "AGI 核心意識覺醒...", 
+        "雲端垃圾回收中...", "高級 AI 自動擺爛..."
     ];
 
-    let teleportCount = 0;
-    const maxTeleport = 15; // 順移 15 次後碎掉
+    let count = 0;
 
-    // 順移函數
-    const teleport = () => {
-        if (teleportCount < maxTeleport) {
-            // 隨機位置
+    const teleportH = () => {
+        if (count < 15) {
+            // 隨機跳躍
             const x = Math.random() * (window.innerWidth - 100);
             const y = Math.random() * (window.innerHeight - 100);
-            
             h.style.position = 'absolute';
             h.style.left = x + 'px';
             h.style.top = y + 'px';
 
-            // 隨機產生高級廢話
-            const word = document.createElement('div');
-            word.className = 'ai-buzzword';
-            word.innerText = buzzwords[Math.floor(Math.random() * buzzwords.length)];
-            word.style.left = x + 'px';
-            word.style.top = (y - 30) + 'px';
-            document.body.appendChild(word);
+            // 噴出廢話
+            const tag = document.createElement('div');
+            tag.className = 'ai-buzzword';
+            tag.innerText = buzzwords[Math.floor(Math.random() * buzzwords.length)];
+            tag.style.left = (x + 50) + 'px';
+            tag.style.top = (y - 20) + 'px';
+            document.body.appendChild(tag);
+            setTimeout(() => tag.remove(), 400);
 
-            // 0.5秒後移除廢話
-            setTimeout(() => word.remove(), 500);
-
-            teleportCount++;
-            setTimeout(teleport, 150); // 每 0.15 秒順移一次
+            count++;
+            setTimeout(teleportH, 150);
         } else {
-            // 結束順移，回到中間碎掉
+            // 回到中間碎掉
             h.style.position = 'static';
-            h.style.margin = 'auto';
-            h.innerText = "H (CRITICAL ERROR)";
             h.style.color = "red";
-            
+            h.innerText = "H (FATAL ERROR)";
             setTimeout(() => {
                 h.classList.add('fall');
                 setTimeout(() => {
                     intro.style.display = 'none';
                     main.classList.remove('hidden');
-                }, 700);
+                }, 600);
             }, 500);
         }
     };
 
-    // 開始瘋狂順移
-    teleport();
+    teleportH();
 
-    // 讓所有生鏽按鈕都導向那個網站
-    const btns = document.querySelectorAll('.rusty-btn');
-    btns.forEach(btn => {
-        btn.onclick = () => {
-            window.location.href = targetUrl;
-        };
+    // 導向陷阱
+    document.querySelectorAll('.rusty-btn').forEach(btn => {
+        btn.onclick = () => window.location.href = targetUrl;
     });
 };
