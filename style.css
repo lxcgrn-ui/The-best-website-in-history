@@ -1,50 +1,82 @@
-body {
+/* 基礎設定 */
+body, html {
     margin: 0;
-    background-color: #1a1a1a;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #0a0a0a;
+    color: #00ff00; /* 高端科技綠 */
     overflow: hidden;
+}
+
+/* 高端登入介面 */
+#login-screen {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    transition: opacity 0.5s;
 }
 
-#intro-layer {
+.login-box {
     text-align: center;
-    position: relative;
-    width: 100%;
+    padding: 40px;
+    border: 1px solid #00ff00;
+    background: rgba(0, 20, 0, 0.9);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
 }
 
-/* 生鏽標題樣式 */
-#title-text {
-    font-size: 60px;
-    color: #8b4513; /* 生鏽棕 */
-    margin-bottom: 50px;
-    transition: transform 3s ease-in-out; /* 變歪的過程 */
-    display: inline-block;
-}
-
-/* 掉下去的動畫狀態 */
-.fall {
-    transform: translateY(120vh) rotate(90deg) !important;
-    transition: transform 1s ease-in !important;
-}
-
-/* 生鏽且永遠歪歪的 DOWNLOAD 按鈕 */
-#download-btn {
+input {
+    background: #000;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 20px;
     display: block;
-    margin: 0 auto;
-    font-size: 30px;
-    font-weight: bold;
-    padding: 20px 50px;
-    background: linear-gradient(135deg, #5d2e0a, #3e1d1d);
-    color: #a0522d;
-    border: 4px solid #000;
-    cursor: pointer;
-    box-shadow: 6px 6px 0px #000;
-    /* 這裡讓它天生就是歪的 */
-    transform: rotate(-10deg); 
+    width: 200px;
 }
 
-#download-btn:hover {
-    background: #4a2508;
+button#verify-btn {
+    background: #00ff00;
+    color: #000;
+    border: none;
+    padding: 10px 30px;
+    font-weight: bold;
+    cursor: pointer;
 }
+
+/* 血腥恐怖模式 */
+.blood-mode {
+    background-color: #2e0000 !important; /* 暗紅背景 */
+    color: #ff0000 !important;
+}
+
+#horror-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 100;
+    pointer-events: none;
+}
+
+/* 亂竄的生鏽按鈕 */
+.scary-btn {
+    position: absolute;
+    background: linear-gradient(135deg, #4d0000, #2b0000);
+    color: #7a0000;
+    border: 2px solid #1a0000;
+    padding: 10px 20px;
+    font-family: 'Constantia', serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 3px 3px 10px #000;
+    pointer-events: auto;
+    cursor: pointer;
+    white-space: nowrap;
+    z-index: 101;
+}
+
+.hidden { display: none; }
