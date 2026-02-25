@@ -10,53 +10,62 @@ body {
 
 #intro-layer {
     text-align: center;
-    position: relative;
     width: 100%;
 }
 
-/* 招牌整體容器 */
-#signboard {
-    display: inline-block;
-    position: relative;
+.sign-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
     margin-bottom: 80px;
-    transition: transform 3s ease-in-out; /* 5秒後變歪的過程 */
+}
+
+/* 招牌基礎樣式 */
+.signboard {
+    position: relative;
+    transition: transform 2s ease-in-out;
     transform-origin: top center;
 }
 
-/* 模擬掛招牌的鍊子 (雖然簡陋但要有型) */
-.chain-left, .chain-right {
+.chain {
     width: 4px;
     height: 30px;
     background: #444;
-    position: absolute;
-    top: -30px;
+    margin: 0 auto;
 }
-.chain-left { left: 20%; }
-.chain-right { right: 20%; }
 
-/* 招牌本體：生鏽金屬板 */
 .plate {
     background: linear-gradient(135deg, #8b4513, #5d2e0a);
     color: #331a00;
-    font-size: 40px;
+    font-size: 28px;
     font-weight: bold;
-    padding: 20px 60px;
-    border: 5px solid #3e1d1d;
-    box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
-    text-shadow: 1px 1px 2px rgba(255,255,255,0.1);
-    border-radius: 5px;
+    padding: 15px 30px;
+    border: 4px solid #3e1d1d;
+    box-shadow: 8px 8px 15px rgba(0,0,0,0.5);
+    border-radius: 3px;
+    white-space: nowrap;
 }
 
-/* 掉下去的動畫 */
+/* 掉落動畫 */
 .fall {
-    transform: translateY(120vh) rotate(110deg) !important;
-    transition: transform 1s ease-in !important;
+    transform: translateY(120vh) rotate(100deg) !important;
+    transition: transform 0.8s ease-in !important;
 }
 
-/* 永遠歪歪的 DOWNLOAD 按鈕 */
+/* 木渣粒子樣式 */
+.wood-chip {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #5d2e0a;
+    pointer-events: none;
+    z-index: 99;
+}
+
+/* 永遠歪斜的按鈕 */
 #download-btn {
     display: block;
-    margin: 50px auto 0;
+    margin: 0 auto;
     font-size: 30px;
     font-weight: bold;
     padding: 20px 50px;
@@ -66,8 +75,4 @@ body {
     cursor: pointer;
     box-shadow: 6px 6px 0px #000;
     transform: rotate(-10deg); 
-}
-
-#download-btn:hover {
-    background: #4a2508;
 }
