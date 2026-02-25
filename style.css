@@ -1,82 +1,73 @@
-/* 基礎設定 */
-body, html {
+body {
     margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #0a0a0a;
-    color: #00ff00; /* 高端科技綠 */
+    background-color: #1a1a1a;
     overflow: hidden;
-}
-
-/* 高端登入介面 */
-#login-screen {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    transition: opacity 0.5s;
 }
 
-.login-box {
+#intro-layer {
     text-align: center;
-    padding: 40px;
-    border: 1px solid #00ff00;
-    background: rgba(0, 20, 0, 0.9);
-    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+    position: relative;
+    width: 100%;
 }
 
-input {
-    background: #000;
-    border: 1px solid #00ff00;
-    color: #00ff00;
-    padding: 10px;
-    font-size: 20px;
-    text-align: center;
-    margin-bottom: 20px;
-    display: block;
-    width: 200px;
+/* 招牌整體容器 */
+#signboard {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 80px;
+    transition: transform 3s ease-in-out; /* 5秒後變歪的過程 */
+    transform-origin: top center;
 }
 
-button#verify-btn {
-    background: #00ff00;
-    color: #000;
-    border: none;
-    padding: 10px 30px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/* 血腥恐怖模式 */
-.blood-mode {
-    background-color: #2e0000 !important; /* 暗紅背景 */
-    color: #ff0000 !important;
-}
-
-#horror-overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 100;
-    pointer-events: none;
-}
-
-/* 亂竄的生鏽按鈕 */
-.scary-btn {
+/* 模擬掛招牌的鍊子 (雖然簡陋但要有型) */
+.chain-left, .chain-right {
+    width: 4px;
+    height: 30px;
+    background: #444;
     position: absolute;
-    background: linear-gradient(135deg, #4d0000, #2b0000);
-    color: #7a0000;
-    border: 2px solid #1a0000;
-    padding: 10px 20px;
-    font-family: 'Constantia', serif;
+    top: -30px;
+}
+.chain-left { left: 20%; }
+.chain-right { right: 20%; }
+
+/* 招牌本體：生鏽金屬板 */
+.plate {
+    background: linear-gradient(135deg, #8b4513, #5d2e0a);
+    color: #331a00;
+    font-size: 40px;
     font-weight: bold;
-    text-transform: uppercase;
-    box-shadow: 3px 3px 10px #000;
-    pointer-events: auto;
-    cursor: pointer;
-    white-space: nowrap;
-    z-index: 101;
+    padding: 20px 60px;
+    border: 5px solid #3e1d1d;
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.1);
+    border-radius: 5px;
 }
 
-.hidden { display: none; }
+/* 掉下去的動畫 */
+.fall {
+    transform: translateY(120vh) rotate(110deg) !important;
+    transition: transform 1s ease-in !important;
+}
+
+/* 永遠歪歪的 DOWNLOAD 按鈕 */
+#download-btn {
+    display: block;
+    margin: 50px auto 0;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 20px 50px;
+    background: linear-gradient(135deg, #5d2e0a, #3e1d1d);
+    color: #a0522d;
+    border: 4px solid #000;
+    cursor: pointer;
+    box-shadow: 6px 6px 0px #000;
+    transform: rotate(-10deg); 
+}
+
+#download-btn:hover {
+    background: #4a2508;
+}
