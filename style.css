@@ -1,26 +1,38 @@
+body { margin: 0; background-color: #1a1a1a; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; font-family: sans-serif; }
+
+#main-stage { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; }
+
+#download-btn {
+    background: linear-gradient(135deg, #8B4513, #5D2E0A); color: #331A00;
+    padding: 30px 80px; font-size: 50px; font-weight: bold; border: 5px solid #3E1D1D;
+    cursor: pointer; box-shadow: 8px 8px 15px rgba(0,0,0,0.5); z-index: 5;
+}
+
+/* 真正的鋼鐵劈刀 */
 #knife {
-    position: absolute; top: -200px; 
-    width: 10px; height: 180px; /* 變細 */
-    background: linear-gradient(to right, #aaa, #ddd, #aaa); /* 金屬光澤 */
-    border-top-left-radius: 5px; border-top-right-radius: 5px;
-    z-index: 10;
-    transition: top 0.1s linear;
+    position: absolute; top: -250px; width: 20px; height: 200px;
+    background: linear-gradient(to right, #a0a0a0, #ffffff, #a0a0a0);
+    z-index: 10; transition: top 0.1s linear;
 }
+#knife::after { /* 刀尖 */
+    content: ''; position: absolute; bottom: -20px; left: 0;
+    width: 20px; height: 25px; background: #a0a0a0; clip-path: polygon(50% 100%, 0 0, 100% 0);
+}
+#knife::before { /* 護手 (Crossguard) */
+    content: ''; position: absolute; top: 140px; left: -25px;
+    width: 70px; height: 15px; background: #333; border-radius: 4px;
+}
+.handle { /* 握柄 */
+    position: absolute; top: 155px; left: -5px; width: 30px; height: 50px; background: #222; border-radius: 2px;
+}
+.knife-fall { top: 20vh !important; }
 
-/* 加上刀尖 (用偽元素畫一個三角形) */
-#knife::after {
-    content: '';
-    position: absolute; bottom: -15px; left: -5px;
-    width: 20px; height: 20px;
-    background: #aaa;
-    clip-path: polygon(50% 100%, 0 0, 100% 0);
+/* 分裂的碎片 */
+.split-left, .split-right {
+    position: absolute; background: #8B4513; color: #331A00; padding: 30px 40px;
+    font-size: 50px; font-weight: bold; border: 5px solid #3E1D1D; z-index: 5;
+    transition: transform 1s ease-in; pointer-events: none;
 }
+.fall { transform: translateY(100vh) rotate(45deg); opacity: 0; }
 
-/* 加上護手 (Crossguard) */
-#knife::before {
-    content: '';
-    position: absolute; top: 120px; left: -20px;
-    width: 50px; height: 10px;
-    background: #444;
-    border-radius: 2px;
-}
+.wood-chip { position: absolute; width: 8px; height: 8px; background-color: #5d2e0a; z-index: 100; }
