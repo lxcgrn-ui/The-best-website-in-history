@@ -1,23 +1,90 @@
-body { margin: 0; background-color: #1a1a1a; height: 100vh; overflow: hidden; display: flex; justify-content: center; align-items: center; }
-
-#download-board {
-    background: #8b4513; color: #331a00; padding: 30px 80px; font-size: 50px; font-weight: bold;
-    border: 5px solid #3e1d1d; cursor: pointer; transition: transform 0.3s;
+body {
+    margin: 0; background-color: #1a1a1a; height: 100vh;
+    display: flex; justify-content: center; align-items: center;
+    overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+#main-stage {
+    position: relative;
+    display: flex; flex-direction: column; align-items: center;
+    width: 100%; height: 100%; justify-content: center;
+}
+
+#download-button-wrapper {
+    position: relative; /* 為了讓分裂的按鈕碎片能定位 */
+    perspective: 1000px; /* 3D效果 */
+}
+
+#download-btn {
+    background: linear-gradient(135deg, #8B4513, #5D2E0A); /* 生鏽棕色 */
+    color: #331A00; /* 生鏽文字顏色 */
+    padding: 30px 80px; font-size: 50px; font-weight: bold;
+    border: 5px solid #3E1D1D; /* 生鏽邊框 */
+    cursor: pointer;
+    transition: transform 0.2s ease-out; /* 點擊按鈕的微小回饋 */
+    transform: rotate(0deg); /* 初始不歪 */
+    box-shadow: 8px 8px 15px rgba(0,0,0,0.5);
+    white-space: nowrap;
+}
+
+#download-btn:active { transform: translateY(2px); } /* 點擊時下沉 */
+
+/* 刀的樣式 */
 #knife {
-    position: absolute; top: -200px; width: 20px; height: 150px; background: #666;
+    position: absolute; top: -150px; /* 初始在螢幕外 */
+    width: 25px; height: 120px; background: #666; /* 刀身顏色 */
     border-top-left-radius: 50%; border-top-right-radius: 50%;
-    transition: top 0.2s linear;
+    transform: translateX(0); /* 刀的水平位置 */
+    transition: top 0.1s linear, transform 0.1s linear; /* 刀掉落和旋轉動畫 */
+    z-index: 10;
+}
+.knife-fall {
+    top: calc(50% - 60px) !important; /* 掉到按鈕中間 */
+    transform: rotate(10deg); /* 讓刀有點斜度 */
+}
+.knife-impact {
+    animation: impactShake 0.1s forwards; /* 劈中瞬間的震動 */
+}
+@keyframes impactShake {
+    0% { transform: translateX(0px); }
+    50% { transform: translateX(5px) rotate(10deg); }
+    100% { transform: translateX(-5px) rotate(10deg); }
 }
 
-/* 劈開後的兩半 */
+
+/* 分裂按鈕的樣式 */
 .split-left, .split-right {
-    position: absolute; width: 150px; height: 100px; background: #8b4513;
-    transition: transform 1s ease-in;
+    position: absolute;
+    background: linear-gradient(135deg, #8B4513, #5D2E0A);
+    color: #331A00;
+    padding: 30px 40px; /* 各一半的 padding */
+    font-size: 50px; font-weight: bold;
+    border: 5px solid #3E1D1D;
+    box-shadow: 8px 8px 15px rgba(0,0,0,0.5);
+    overflow: hidden; /* 防止文字溢出 */
+    transition: transform 1s ease-in, opacity 1s ease-in;
+    white-space: nowrap;
+    z-index: 5;
+    pointer-events: none; /* 讓它們無法被點擊 */
 }
 
-.fall { transform: translateY(120vh) rotate(45deg) !important; }
+.split-left { border-right: none; border-top-right-radius: 0; border-bottom-right-radius: 0; }
+.split-right { border-left: none; border-top-left-radius: 0; border-bottom-left-radius: 0; }
 
-#blue-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0078d7; color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; }
+.fall { transform: translateY(150vh) rotate(90deg) !important; opacity: 0; }
+
+/* 木渣粒子 */
+.wood-chip {
+    position: absolute; width: 8px; height: 8px; background-color: #5d2e0a;
+    border-radius: 2px;
+    pointer-events: none; opacity: 0;
+    animation: splinter-burst 1s forwards;
+    z-index: 100;
+}
+
+@keyframes splinter-burst {
+    0% { transform: translate(0, 0) scale(1); opacity: 1; }
+    100% { transform: translate(var(--x), var(--y)) scale(0) rotate(var(--r)); opacity: 0; }
+}
+
 .hidden { display: none; }
